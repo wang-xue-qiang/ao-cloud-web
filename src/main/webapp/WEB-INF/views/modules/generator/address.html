@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="全称">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+            <a class="btn btn-info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a class="btn btn-danger" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2 control-label">编码</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="address.code"
+						placeholder="编码" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">父级编码</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control"
+						v-model="address.parentCode" placeholder="父级编码" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">全称</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="address.name"
+						placeholder="全称" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">简称</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control"
+						v-model="address.shortName" placeholder="简称" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">经度</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control"
+						v-model="address.longitude" placeholder="经度" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">纬度</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control"
+						v-model="address.latitude" placeholder="纬度" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">级别</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="address.level"
+						placeholder="级别（1省2市3乡|区4街道）" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">排序</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="address.sort"
+						placeholder="排序" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate"
+					value="确定" /> &nbsp;&nbsp;<input type="button"
+					class="btn btn-warning" @click="reload" value="返回" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/generator/address.js?_${.now?long}"></script>
+</body>
+</html>

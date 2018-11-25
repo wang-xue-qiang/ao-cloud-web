@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户表</title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="姓名">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+            <a class="btn btn-info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a class="btn btn-danger" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">归属公司</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.companyId"
+							placeholder="归属公司" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">归属部门</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.officeId"
+							placeholder="归属部门" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">登录名</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.loginName"
+							placeholder="登录名" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">姓名</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.name"
+							placeholder="姓名" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">邮箱</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.email"
+							placeholder="邮箱" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">电话</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.phone"
+							placeholder="电话" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">手机</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model="user.mobile"
+							placeholder="手机" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" @click="saveOrUpdate"
+						value="确定" /> &nbsp;&nbsp;<input type="button"
+						class="btn btn-warning" @click="reload" value="返回" />
+				</div>
+			</form>
+		</div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/generator/user.js?_${.now?long}"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkh.modules.generator.dao.BaseArticleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.zkh.modules.generator.entity.BaseArticleEntity" id="baseArticleMap">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="content" column="content"/>
+        <result property="tag" column="tag"/>
+        <result property="type" column="type"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
+        <result property="isTop" column="is_top"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.zkh.modules.generator.entity.BaseArticleEntity">
+		select * from base_article where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.zkh.modules.generator.entity.BaseArticleEntity">
+		select * from base_article
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from base_article 
+	</select>
+	 
+	<insert id="save" parameterType="com.zkh.modules.generator.entity.BaseArticleEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into base_article
+		(
+			`title`, 
+			`description`, 
+			`content`, 
+			`tag`, 
+			`type`, 
+			`user_id`, 
+			`status`, 
+			`is_top`
+		)
+		values
+		(
+			#{title}, 
+			#{description}, 
+			#{content}, 
+			#{tag}, 
+			#{type}, 
+			#{userId}, 
+			#{status}, 
+			#{isTop}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.zkh.modules.generator.entity.BaseArticleEntity">
+		update base_article 
+		<set>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="tag != null">`tag` = #{tag}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="isTop != null">`is_top` = #{isTop}, </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from base_article where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from base_article where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
