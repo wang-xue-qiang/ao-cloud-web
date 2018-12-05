@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<#include "/header.html">
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/echarts/china.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/echarts//world.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/echarts//china-contour.js"></script>
+</head>
+<body>
+<div class="col-lg-12 col-md-12 col-xs-12">
+	<!--custom chart start-->
+	<div id="container" style="height: 600px; width: 100%"></div>
+	<!--custom chart end-->
+</div>
+<script src="${request.contextPath}/statics/js/modules/generator/customermap.js?_${.now?long}"></script>
+</body>
+</html>

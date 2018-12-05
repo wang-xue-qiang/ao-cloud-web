@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>设备表</title>
+<title>客户表</title>
 <#include "/header.html">
 </head>
 <body>
@@ -9,7 +9,7 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.equipName" @keyup.enter="query" placeholder="设备名称">
+				<input type="text" class="form-control" v-model="q.cusName" @keyup.enter="query" placeholder="客户名称">
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
             <a class="btn btn-info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
@@ -22,22 +22,21 @@
     
     <div v-show="!showList" class="panel panel-default">
 		<div class="panel-heading">{{title}}</div>
-		
 		<form role="form">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
 						    <label class="col-sm-2 control-label">客户名称</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.equipName"  placeholder="客户名称">
+						      <input type="text" class="form-control" v-model="customer.cusName"  placeholder="客户名称">
 						    </div>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						    <label class="col-sm-2 control-label">客户编号</label>
+						    <label class="col-sm-2 control-label">客户编码</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control"   placeholder="客户编号">
+						      <input type="text" class="form-control" v-model="customer.cusNo"  placeholder="客户编码">
 						    </div>
 						</div>
 					</div>					
@@ -46,75 +45,74 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-						    <label class="col-sm-2 control-label">设备名称</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.equipName"  placeholder="设备名称">
-						    </div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-						    <label class="col-sm-2 control-label">设备编号</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.equipNo"  placeholder="设备编号">
-						    </div>
-						</div>
-					</div>					
-				</div>
-
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-						    <label class="col-sm-2 control-label">品牌</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.brandId"  placeholder="品牌">
-						    </div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-						    <label class="col-sm-2 control-label">型号</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.modelNo"  placeholder="型号">
-						    </div>
-						</div>
-					</div>					
-				</div>
-
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-						    <label class="col-sm-2 control-label">终端序列号</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.termiSeq"  placeholder="终端序列号">
-						    </div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-						    <label class="col-sm-2 control-label">终端mac地址</label>
-						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.termiMac"  placeholder="终端mac地址">
-						    </div>
-						</div>
-					</div>					
-				</div>
-
-
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
 						    <label class="col-sm-2 control-label">联系人</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.contName"  placeholder="联系人">
+						      <input type="text" class="form-control" v-model="customer.contact"  placeholder="联系人">
 						    </div>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						    <label class="col-sm-2 control-label">联系人电话</label>
+						    <label class="col-sm-2 control-label">联系电话</label>
 						    <div class="col-sm-10">
-						      <input type="text" class="form-control" v-model="equip.contMobile"  placeholder="联系人电话">
+						      <input type="text" class="form-control" v-model="customer.mobile"  placeholder="联系电话">
+						    </div>
+						</div>
+					</div>					
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+						    <label class="col-sm-2 control-label">业务员</label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" v-model="customer.staffName"  placeholder="业务员">
+						    </div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+						    <label class="col-sm-2 control-label">业务员电话</label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" v-model="customer.staffTel"  placeholder="业务员电话">
+						    </div>
+						</div>
+					</div>					
+				</div>
+
+
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">省</label>
+						    <div class="col-sm-6">
+							     <select class="form-control" v-model="provinceCode" @change="getCity(provinceCode)">
+							     	<option value="">请选择</option>
+									<option v-bind:value="province.code"  v-for="province of provinces" >{{ province.name }}</option>
+								 </select>
+						    </div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">市</label>
+						    <div class="col-sm-6">
+						      	 <select class="form-control" v-model="cityCode"    @change="getAreas(cityCode)" >
+						      	 	<option value="">请选择</option>
+									<option v-bind:value="city.code"  v-for="city of citys" >{{ city.name }}</option>
+								 </select>
+						    </div>
+						</div>
+					</div>	
+					<div class="col-sm-4">
+						<div class="form-group">
+						    <label class="col-sm-4 control-label">区、县</label>
+						    <div class="col-sm-6">
+						    	<select class="form-control" v-model="areaCode" >
+						    		<option value="">请选择</option>
+									<option v-bind:value="area.code"  v-for="area of areas" >{{ area.name }}</option>
+								 </select>
+						      
 						    </div>
 						</div>
 					</div>					
@@ -123,13 +121,14 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-group">
-						    <label class="col-sm-1   control-label">备注</label>
+						    <label class="col-sm-1   control-label">详细地址</label>
 						    <div class="col-sm-10" style="margin-left:52px;">
-						      <textarea class="form-control" v-model="equip.remarks" rows="5"></textarea>
+						      <textarea class="form-control" v-model="customer.cusRoad" rows="5"></textarea>
 						    </div>
 						</div>
 					</div>				
 				</div>
+
 
 				<div class="row" style="margin-bottom: 40px;">
 					<div class="form-group">
@@ -141,10 +140,12 @@
 							<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
 					    </div>
 					</div>
-				</div>		
+				</div>
+				
 		</form>
 	</div>
 </div>
-<script src="${request.contextPath}/statics/js/modules/generator/equip.js?_${.now?long}"></script>
+
+<script src="${request.contextPath}/statics/js/modules/generator/customer.js?_${.now?long}"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ $(function () {
         url: baseURL + 'basebanner/list',
         datatype: "json",
         colModel: [			
-			{ label: '编号', name: 'id', index: 'id', width: 50, key: true },
+			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },
 			{ label: '链接地址', name: 'url', index: 'url', width: 80 }, 			
 			{ label: '排序', name: 'sort', index: 'sort', width: 80 }, 			
 			{ label: '描述', name: 'description', index: 'description', width: 80 }, 			

@@ -1,33 +1,30 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'basearticle/list',
+        url:  'http://localhost:8000/customer/list',
         datatype: "json",
         colModel: [			
-			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '标题', name: 'title', index: 'title', width: 80 }, 			
-			{ label: '描述', name: 'description', index: 'description', width: 80 }, 			
-			{ label: '内容', name: 'content', index: 'content', width: 80 }, 			
-			{ label: '标签', name: 'tag', index: 'tag', width: 80 }, 			
-			{ label: '类型', name: 'type', index: 'type', width: 80 }, 			
-			{ label: '发表人', name: 'userId', index: 'user_id', width: 80 }, 			
-			{ label: '发布状态', name: 'status', index: 'status', width: 80 }, 			
-			{ label: '是否置顶', name: 'isTop', index: 'is_top', width: 80 }, 			
-			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 120 }			
+			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },		
+			{ label: '客户名称', name: 'cusName', index: 'cus_name', width: 150 }, 			
+			{ label: '客户编号', name: 'cusNo', index: 'cus_no', width: 50 }, 			 			
+			{ label: '联系人', name: 'contact', index: 'contact', width: 50 }, 			
+			{ label: '联系人电话', name: 'mobile', index: 'mobile', width: 60 }, 					
+			{ label: '业务员', name: 'staffName', index: 'staff_name', width: 60 }, 			
+			{ label: '业务员电话', name: 'staffTel', index: 'staff_tel', width: 50 }													
         ],
 		viewrecords: true,
         height: 385,
         rowNum: 10,
 		rowList : [10,30,50],
         rownumbers: true, 
-        rownumWidth: 25, 
+        rownumWidth: 50, 
         autowidth:true,
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "data.list",
+            page: "data.currPage",
+            total: "data.totalPage",
+            records: "data.totalCount"
         },
         prmNames : {
             page:"page", 
@@ -44,18 +41,38 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
+        q:{
+        	cusName: null
+        },
 		showList: true,
 		title: null,
-		baseArticle: {}
+		customer: {},
+		provinceCode:'',
+		cityCode:'',
+		areaCode:'',
+		provinces:[],
+        citys:[],
+        areas:[]
 	},
 	methods: {
+		getCity: function(provinceCode){
+			$.get( "http://localhost:8000/address/findAddress/"+provinceCode+"/2", function(r){
+	            vm.citys = r.data;
+	            vm.areas = null;
+	        });
+		},
+		getAreas: function(cityCode){
+			$.get( "http://localhost:8000/address/findAddress/"+cityCode+"/3", function(r){
+	            vm.areas = r.data;
+	        });
+		},
 		query: function () {
 			vm.reload();
 		},
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.baseArticle = {};
+			vm.customer = {};
 		},
 		update: function (event) {
 			var id = getSelectedRow();
@@ -68,14 +85,14 @@ var vm = new Vue({
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.baseArticle.id == null ? "basearticle/save" : "basearticle/update";
+			var url =  "http://localhost:8000/customer/save" ;
 			$.ajax({
 				type: "POST",
-			    url: baseURL + url,
+			    url:  url,
 			    contentType: "application/json",
-			    data: JSON.stringify(vm.baseArticle),
+			    data: JSON.stringify(vm.customer),
 			    success: function(r){
-			    	if(r.code === 0){
+			    	if(r.status === 200){
 						alert('操作成功', function(index){
 							vm.reload();
 						});
@@ -94,11 +111,11 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "basearticle/delete",
+				    url:  "http://localhost:8000/customer/delete",
 				    contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
-						if(r.code == 0){
+						if(r.status == 200){
 							alert('操作成功', function(index){
 								$("#jqGrid").trigger("reloadGrid");
 							});
@@ -110,16 +127,23 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get(baseURL + "basearticle/info/"+id, function(r){
-                vm.baseArticle = r.baseArticle;
+			$.get( "http://localhost:8000/customer/get/"+id, function(r){
+                vm.customer = r.data;
             });
 		},
 		reload: function (event) {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{ 
+				postData:{'cusName': vm.q.cusName},
                 page:page
             }).trigger("reloadGrid");
 		}
+	},
+	mounted: function(){
+		$.get( "http://localhost:8000/address/findAddress/0/1", function(r){
+            vm.provinces = r.data;
+        });
 	}
+	
 });

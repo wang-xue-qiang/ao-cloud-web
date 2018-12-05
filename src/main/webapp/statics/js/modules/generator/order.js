@@ -3,15 +3,11 @@ $(function () {
         url:  'http://localhost:8000/order/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '订购编号', name: 'orderNo', index: 'order_no', width: 80 }, 			
-			{ label: '业务员ID', name: 'userId', index: 'user_id', width: 80 }, 			
-			{ label: '服务id', name: 'serviceId', index: 'service_id', width: 80 }, 					
-			{ label: '联系人', name: 'contact', index: 'contact', width: 80 }, 			
-			{ label: '联系人电话', name: 'contactMobile', index: 'contact_mobile', width: 80 }, 			 			
-			{ label: '服务单号', name: 'serviceBatch', index: 'service_batch', width: 80 }, 			
+			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },
+			{ label: '派单编号', name: 'orderNo', index: 'order_no', width: 80 }, 			 							
 			{ label: '预约时间', name: 'appointTime', index: 'appoint_time', width: 80 }, 											
-			{ label: '备注信息', name: 'remarks', index: 'remarks', width: 80 } 							
+			{ label: '联系人', name: 'contact', index: 'contact', width: 80 }, 			
+			{ label: '联系人电话', name: 'contactMobile', index: 'contact_mobile', width: 80 }		 									
         ],
 		viewrecords: true,
         height: 385,

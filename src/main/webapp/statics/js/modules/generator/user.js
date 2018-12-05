@@ -3,7 +3,7 @@ $(function () {
         url: 'http://localhost:8000/user/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },			
+			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },			
 			{ label: '登录名', name: 'loginName', index: 'login_name', width: 80 }, 				
 			{ label: '工号', name: 'no', index: 'no', width: 80 }, 			
 			{ label: '姓名', name: 'name', index: 'name', width: 80 }, 			
