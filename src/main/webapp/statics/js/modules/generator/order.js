@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url:  'http://localhost:8000/order/list',
+        url:  'http://39.105.200.153:8000/order/list',
         datatype: "json",
         colModel: [			
 			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },
@@ -67,7 +67,7 @@ var vm = new Vue({
 		saveOrUpdate: function (event) {
 			$.ajax({
 				type: "POST",
-			    url: "http://localhost:8000/order/save",
+			    url: "http://39.105.200.153:8000/order/save",
 			    contentType: "application/json",
 			    data: JSON.stringify(vm.order),
 			    success: function(r){
@@ -89,7 +89,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "http://localhost:8000/order/delete",
+				    url: "http://39.105.200.153:8000/order/delete",
 				    contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
@@ -105,7 +105,7 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get("http://localhost:8000/order/get/"+id, function(r){
+			$.get("http://39.105.200.153:8000/order/get/"+id, function(r){
                 vm.order = r.data;
             });
 		},

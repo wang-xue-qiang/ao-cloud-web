@@ -2,7 +2,7 @@ initData();
 function initData() {
 	var data = null;
 	$.ajax({
-		url : "http://localhost:8000/customer/initMapData",
+		url : "http://39.105.200.153:8000/customer/initMapData",
 		type : "GET",
 		async : false,
 		success : function(req) {

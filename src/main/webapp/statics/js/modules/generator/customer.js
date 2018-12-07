@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url:  'http://localhost:8000/customer/list',
+        url:  'http://39.105.200.153:8000/customer/list',
         datatype: "json",
         colModel: [			
 			{ label: '主键', name: 'id', index: 'id', width: 50, key: true },		
@@ -56,13 +56,13 @@ var vm = new Vue({
 	},
 	methods: {
 		getCity: function(provinceCode){
-			$.get( "http://localhost:8000/address/findAddress/"+provinceCode+"/2", function(r){
+			$.get( "http://39.105.200.153:8000/address/findAddress/"+provinceCode+"/2", function(r){
 	            vm.citys = r.data;
 	            vm.areas = null;
 	        });
 		},
 		getAreas: function(cityCode){
-			$.get( "http://localhost:8000/address/findAddress/"+cityCode+"/3", function(r){
+			$.get( "http://39.105.200.153:8000/address/findAddress/"+cityCode+"/3", function(r){
 	            vm.areas = r.data;
 	        });
 		},
@@ -85,7 +85,7 @@ var vm = new Vue({
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url =  "http://localhost:8000/customer/save" ;
+			var url =  "http://39.105.200.153:8000/customer/save" ;
 			$.ajax({
 				type: "POST",
 			    url:  url,
@@ -111,7 +111,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url:  "http://localhost:8000/customer/delete",
+				    url:  "http://39.105.200.153:8000/customer/delete",
 				    contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
@@ -127,7 +127,7 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get( "http://localhost:8000/customer/get/"+id, function(r){
+			$.get( "http://39.105.200.153:8000/customer/get/"+id, function(r){
                 vm.customer = r.data;
             });
 		},
@@ -141,7 +141,7 @@ var vm = new Vue({
 		}
 	},
 	mounted: function(){
-		$.get( "http://localhost:8000/address/findAddress/0/1", function(r){
+		$.get( "http://39.105.200.153:8000/address/findAddress/0/1", function(r){
             vm.provinces = r.data;
         });
 	}
